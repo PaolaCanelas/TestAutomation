@@ -1,0 +1,50 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build artifacts
+dist/
+build/
+.next/ # For Next.js projects
+out/ # For various build outputs
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE and OS generated files
+.DS_Store
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+Thumbs.db
+
+# Test related files
+coverage/
+.nyc_output/
+
+# Editor specific files
+*.swp
+*.swo
+
+# Temporary files
+tmp/
+temp/
+
+# Compiled files
+*.js.map
+*.css.map
+
+# Other common exclusions
+package-lock.json # If using Yarn, you might want to ignore this
+yarn.lock # If using npm, you might want to ignore this

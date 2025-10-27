@@ -27,6 +27,10 @@ describe("AnyList - Login", () => {
 
     const errorText = await errorBanner.getText();
     expect(errorText).toContain("The username and password entered do not match. Please try again.");
+
+    const okButton = await $('//*[@text="OK"]');
+    await okButton.waitForDisplayed({ timeout: 5000 });
+    await okButton.click();
   });
 
   it("should be able to login with valid credentials", async () => {
@@ -43,6 +47,4 @@ describe("AnyList - Login", () => {
 
     expect(await homeTitle.isDisplayed()).toBe(true);
   });
-
-  
 });

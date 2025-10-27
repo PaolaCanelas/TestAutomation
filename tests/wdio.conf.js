@@ -60,7 +60,7 @@ export const config = {
         // "appium:app": "C:\\Paola\\TESTAUTOMATION\\anylist.apk",
         "appium:appPackage": "com.purplecover.anylist",
         "appium:appActivity": ".ui.LaunchActivity",
-        "appium:noReset": true
+        "appium:noReset": false
     
     }],
 
