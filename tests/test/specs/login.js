@@ -3,7 +3,7 @@ import { expect } from "@wdio/globals";
 describe("AnyList - Login", () => {
 
   beforeEach(async () => {
-    const getStartedButton = await $('//android.widget.Button[@resource-id="com.purplecover.anylist:id/first_launch_get_started_button"]');
+    const getStartedButton = await $('//*[@text="Get Started"]');
     if (await getStartedButton.isDisplayed()) {
       await getStartedButton.click();
     }
@@ -29,7 +29,6 @@ describe("AnyList - Login", () => {
     expect(errorText).toContain("The username and password entered do not match. Please try again.");
 
     const okButton = await $('//*[@text="OK"]');
-    await okButton.waitForDisplayed({ timeout: 5000 });
     await okButton.click();
   });
 

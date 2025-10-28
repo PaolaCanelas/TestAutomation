@@ -1,29 +1,38 @@
 describe('Browse & Filter', () => {
 
 
-it('Browse & Filter: open product list, apply filter, verify list changes', async () => {
+it('Browse & Filter: Create List ', async () => {
 
-    const listsBtn = await $(['//*[@text="Groceries"]','//*[@text="My Lists"]','//*[@content-desc="lists"]']);
+    const listsBtn = await $(['//*[@resource-id="com.purplecover.anylist:id/list_folder_add_menu"]']);
     await listsBtn.waitForDisplayed({ timeout: TIMEOUT });
     await listsBtn.click();
 
-    const firstList = await $('(//android.widget.TextView)[1]');
-    await firstList.waitForDisplayed({ timeout: TIMEOUT });
-    await firstList.click();
+    const CreateList = await $('//*[@text="Create List"]');
+    await CreateList.waitForDisplayed({ timeout: TIMEOUT });
+    await CreateList.click();
 
- 
-    const filterBtn = await $(['//*[@content-desc="Filter"]','//*[@text="Filter"]','//*[@resource-id="com.purplecover.anylist:id/filter"]']);
-    await filterBtn.waitForDisplayed({ timeout: TIMEOUT });
-    await filterBtn.click();
 
-    const sortByName = await $(['//*[@text="Sort by Name"]','//*[@text="Name"]','//*[@text="Sort"]']);
-    await sortByName.waitForDisplayed({ timeout: TIMEOUT });
-    await sortByName.click();
+    const listNameField = await $('//*[@text="List Name"]');
+    await listNameField.waitForDisplayed({ timeout: 10000 });
+    await listNameField.setValue("List test demo");
 
-    const firstItem = await $('(//android.widget.TextView)[1]');
-    await firstItem.waitForDisplayed({ timeout: TIMEOUT });
-    const text = await firstItem.getText();
-    if (!text || text.length === 0) throw new Error('Unable to read first item after sorting');
-  });
+    await driver.pause(1000);
+
+    const saveButton = await $('//*[@text="SAVE"]');
+    await saveButton.waitForDisplayed({ timeout: 10000 });
+    await saveButton.click();
+
+    const newList = await $('//android.view.View[@resource-id="com.purplecover.anylist:id/selectable_row_background_binding"]');
+    await expect(newList).toBeDisplayed();
+
+});
+
+it('Browse & Filter: Filter product list ', async () => {
+
+    const iconoFilter = await $(['//*[@resource-id="com.purplecover.anylist:id/search_list_folder_action"]']);
+    await iconoFilter .waitForDisplayed({ timeout: TIMEOUT });
+    await iconoFilter .click();
+
+});
 
 });

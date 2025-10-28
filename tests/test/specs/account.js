@@ -1,6 +1,6 @@
 describe("AnyList - Create Account", () => {
   beforeEach(async () => {
-    const getStartedButton = await $('//android.widget.Button[@resource-id="com.purplecover.anylist:id/first_launch_get_started_button"]');
+    const getStartedButton = await $('//*[@text="Get Started"]');
 
     if (await getStartedButton.isDisplayed()) {
       await getStartedButton.click();
