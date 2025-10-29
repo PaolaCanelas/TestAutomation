@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "commonjs",
+    "lib": ["es2022", "dom"],
+    "types": [
+      "node",
+      "@wdio/globals/types",
+      "@wdio/types",
+      "expect-webdriverio",
+      "@wdio/mocha-framework",
+      "@wdio/appium-service"
+    ],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": [
+    "test",
+    "pageobjects",
+    "wdio.conf.ts"
+  ]
+}
