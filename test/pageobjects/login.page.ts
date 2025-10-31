@@ -8,6 +8,10 @@ export default class LoginPage {
   private errorBanner: ChainablePromiseElement<Promise<WebdriverIO.Element>>;
   private okButton: ChainablePromiseElement<Promise<WebdriverIO.Element>>;
   private homeTitle: ChainablePromiseElement<Promise<WebdriverIO.Element>>;
+  private dontAllowButton: ChainablePromiseElement<Promise<WebdriverIO.Element>>;
+  private settingsButton: ChainablePromiseElement<Promise<WebdriverIO.Element>>;
+  private accountSecction: ChainablePromiseElement<Promise<WebdriverIO.Element>>;
+  private signOut: ChainablePromiseElement<Promise<WebdriverIO.Element>>;
   
   constructor() {
     this.signInTab = $('//*[@text="Sign In"]');
@@ -16,7 +20,10 @@ export default class LoginPage {
     this.signInWithAnyListAccountButton = $('//*[@text="Sign In with AnyList Account"]');
     this.errorBanner = $('//android.widget.TextView[@resource-id="android:id/message"]');
     this.okButton = $('//*[@text="OK"]');
-    this.dontAllowButton = $('//android.widget.Button[@resource-id="com.android.permissioncontroller:id/permission_deny_button"]')
+    this.dontAllowButton = $('//android.widget.Button[@resource-id="com.android.permissioncontroller:id/permission_deny_button"]');
+    this.settingsButton = $('(//android.widget.ImageView[@resource-id="com.purplecover.anylist:id/navigation_bar_item_icon_view"])[4]');
+    this.accountSecction = $('(//android.view.ViewGroup[@resource-id="com.purplecover.anylist:id/delete_row_background_binding"])[1]');
+    this.signOut = $('//*[@text="Sign Out"]');
     this.homeTitle = $('//*[@text="Lists"]');
   }
 
@@ -67,6 +74,21 @@ export default class LoginPage {
   async confirmDontAllow() {
     await this.dontAllowButton.waitForDisplayed({ timeout: 5000 });
     await this.dontAllowButton.click();
+  }
+
+  async clickSettings() {
+    await this.settingsButton.waitForDisplayed({ timeout: 5000 });
+    await this.settingsButton.click();
+  }
+
+  async clickAccount() {
+    await this.accountSecction.waitForDisplayed({ timeout: 5000 });
+    await this.accountSecction.click();
+  }
+
+   async clickSignOut() {
+    await this.signOut.waitForDisplayed({ timeout: 5000 });
+    await this.signOut.click();
   }
 
   async isHomeDisplayed(): Promise<boolean> {

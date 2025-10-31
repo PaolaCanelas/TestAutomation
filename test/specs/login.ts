@@ -5,26 +5,36 @@ describe('AnyList - Login', () => {
   let loginPage: LoginPage;
 
   beforeEach(async () => {
-    loginPage = new LoginPage(); 
+    
+    const appPackage = 'com.purplecover.anylist';
+    try {
+      await driver.terminateApp(appPackage);
+    } catch (e) {
+      console.warn('App no estaba activa:', e.message);
+    }
+    
+    await driver.activateApp(appPackage);
+
+    loginPage = new LoginPage();
     await loginPage.openLoginScreen();
   });
 
-  // it('should not be able to login with invalid credentials', async () => {
-  //   await loginPage.login('wrong_user@mail.com', 'Control123');
+  it('should not be able to login with invalid credentials', async () => {
+    await loginPage.login('wrong_user@mail.com', 'Control123');
 
-  //   const errorText = await loginPage.getErrorText();
-  //   expect(errorText).toContain(
-  //     'The username and password entered do not match. Please try again.'
-  //   );
+    const errorText = await loginPage.getErrorText();
+    expect(errorText).toContain(
+      'The username and password entered do not match. Please try again.'
+    );
 
-  //   await loginPage.confirmError();
-  // });
+    await loginPage.confirmError();
+  });
 
   it('should be able to login with valid credentials', async () => {
     await loginPage.login('test_user@mail.com', 'Control123');
-    await loginPage.confirmDontAllow();
-
+    // await loginPage.confirmDontAllow();
     const isHomeVisible = await loginPage.isHomeDisplayed();
     expect(isHomeVisible).toBe(true);
+
   });
 });

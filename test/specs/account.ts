@@ -1,14 +1,24 @@
-// import CreateAccountPage from '../pageobjects/account.page';
+import CreateAccountPage from '../pageobjects/account.page';
 
-// describe('AnyList - Create Account', () => {
-//   let createAccountPage: CreateAccountPage;
+describe('AnyList - Create Account', () => {
+  let createAccountPage: CreateAccountPage;
+  const appPackage = 'com.purplecover.anylist'; 
 
-//   beforeEach(async () => {
-//     createAccountPage = new CreateAccountPage();
-//     await createAccountPage.openCreateAccountScreen();
-//   });
+  beforeEach(async () => {
+    try {
+      await driver.terminateApp(appPackage);
+    } catch (e) {
+      console.warn('La app no estaba activa:', e.message);
+    }
 
-//   it('should create a new account successfully', async () => {
-//     await createAccountPage.createAccount();
-//   });
-// });
+    await driver.activateApp(appPackage);
+
+    // Reinstancia la página y abre la pantalla de creación de cuenta
+    createAccountPage = new CreateAccountPage();
+    await createAccountPage.openCreateAccountScreen();
+  });
+
+  it('should create a new account successfully', async () => {
+    await createAccountPage.createAccount();
+  });
+});

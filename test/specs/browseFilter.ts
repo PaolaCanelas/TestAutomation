@@ -1,39 +1,25 @@
-// import { expect } from '@wdio/globals';
+import BrowseFilterPage from '../pageobjects/browseFilter.page';
 
-// describe('Browse & Filter', () => {
+describe('Browse & Filter', () => {
+  let browseFilterPage: BrowseFilterPage;
 
-//     const TIMEOUT = 10000;
+  beforeEach(async () => {
+    browseFilterPage = new BrowseFilterPage();
+  });
 
-//     it('Browse & Filter: Create List', async () => {
+  it('should create a new list successfully', async () => {
+    await browseFilterPage.createList('List Demo test');
+    expect(await browseFilterPage.isNewListDisplayed()).toBe(true);
+    await browseFilterPage.ClickBack();
 
-//         const listsBtn = await $('//*[@resource-id="com.purplecover.anylist:id/list_folder_add_menu"]');
-//         await listsBtn.waitForDisplayed({ timeout: TIMEOUT });
-//         await listsBtn.click();
 
-//         const createList = await $('//*[@text="Create List"]');
-//         await createList.waitForDisplayed({ timeout: TIMEOUT });
-//         await createList.click();
+  });
 
-//         const listNameField = await $('//*[@text="List Name"]');
-//         await listNameField.waitForDisplayed({ timeout: TIMEOUT });
-//         await listNameField.setValue('List test demo');
+  it('should open the filter menu', async () => {
+    await browseFilterPage.openFilter();
+    await browseFilterPage.enterSearchInput('List test demo');
+    expect(await browseFilterPage.isListVisible('List Demo test')).toBe(true);
 
-//         await driver.pause(1000);
 
-//         const saveButton = await $('//*[@text="SAVE"]');
-//         await saveButton.waitForDisplayed({ timeout: TIMEOUT });
-//         await saveButton.click();
-
-//         const newList = await $('//android.view.View[@resource-id="com.purplecover.anylist:id/selectable_row_background_binding"]');
-//         await expect(newList).toBeDisplayed();
-//     });
-
-//     it('Browse & Filter: Filter product list', async () => {
-
-//         const iconFilter = await $('//*[@resource-id="com.purplecover.anylist:id/search_list_folder_action"]');
-//         await iconFilter.waitForDisplayed({ timeout: TIMEOUT });
-//         await iconFilter.click();
-
-//     });
-
-// });
+  });
+});
