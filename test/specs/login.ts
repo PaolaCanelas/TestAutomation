@@ -77,7 +77,6 @@ describe('AnyList - application', () => {
     await browseFilterPage.openFilter();
     await browseFilterPage.enterSearchInput('List test QA');
     await browseFilterPage.openList('List test QA');
-    const firstItemBefore = await browseFilterPage.getFirstItemText();
     await browseFilterPage.clicKAddItem(); 
     await browseFilterPage.applyFilter('Milk');   
     const firstItemAfter = await browseFilterPage.getFirstItemText(); 

@@ -106,12 +106,5 @@ export default class BrowseFilterPage {
     await this.quantityButton.waitForDisplayed({ timeout: 10000 });
     await this.quantityButton.click();
   }
-
-   async getFirstItemText() {
-    const firstItem = await $('(//android.widget.TextView[@resource-id="com.purplecover.anylist:id/item_name_text"])[1]');
-    await firstItem.waitForDisplayed({ timeout: 10000 });
-    return await firstItem.getText();
-  }
-
 }
 
