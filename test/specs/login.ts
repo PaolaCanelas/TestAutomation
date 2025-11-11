@@ -14,7 +14,7 @@ describe('AnyList - application', () => {
     }
     
     await driver.activateApp(appPackage);
-  });
+  });  
 
   it('should not be able to login with invalid credentials', async () => {
     const loginPage = new LoginPage();
@@ -69,6 +69,34 @@ describe('AnyList - application', () => {
     await browseFilterPage.openFilter();
     await browseFilterPage.enterSearchInput('List test QA');
     expect(await browseFilterPage.isListVisible('List test QA')).toBe(true);
+  });
+
+  it('should add item to list', async () => { 
+    const browseFilterPage = new BrowseFilterPage();
+
+    await browseFilterPage.openFilter();
+    await browseFilterPage.enterSearchInput('List test QA');
+    await browseFilterPage.openList('List test QA');
+    const firstItemBefore = await browseFilterPage.getFirstItemText();
+    await browseFilterPage.clicKAddItem(); 
+    await browseFilterPage.applyFilter('Milk');   
+    const firstItemAfter = await browseFilterPage.getFirstItemText(); 
+    expect(firstItemBefore).not.toEqual(firstItemAfter); 
+  
+  });
+
+  it('Add an item, verify quantity and total price', async () => { 
+    const browseFilterPage = new BrowseFilterPage();
+
+    await browseFilterPage.openFilter();
+    await browseFilterPage.enterSearchInput('List test QA');
+    await browseFilterPage.openList('List test QA');
+    await browseFilterPage.clicKAddItem(); 
+    await browseFilterPage.applyFilter('coffe');   
+    await browseFilterPage.clickItem();   
+    await browseFilterPage.clickPriceButton();
+    await browseFilterPage.clickQuantityButton();
+  
   });
 
 });
