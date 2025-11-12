@@ -59,9 +59,9 @@ export default class BrowseFilterPage {
   }
 
   async openFilter() {
-    await this.filterIcon.waitForDisplayed({ timeout: 10000 });
-    await this.filterIcon.click();
-  }
+  await this.filterIcon.waitForDisplayed({ timeout: 10000 });
+  await this.filterIcon.click();
+}
 
   async enterSearchInput(textlist: string) {
     await this.searchInput.waitForDisplayed({ timeout: 10000 });
@@ -106,5 +106,16 @@ export default class BrowseFilterPage {
     await this.quantityButton.waitForDisplayed({ timeout: 10000 });
     await this.quantityButton.click();
   }
+
+  async isItemVisible(itemName: string): Promise<boolean> {
+    const item = await $(`//*[@text="${itemName}"]`);
+    try {
+      await item.waitForDisplayed({ timeout: 10000 });
+      return true;
+    } catch {
+      return false;
+    }
+ }
+
 }
 
