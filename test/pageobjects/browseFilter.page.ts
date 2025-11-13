@@ -116,6 +116,24 @@ export default class BrowseFilterPage {
       return false;
     }
  }
+  // async getFirstItemText(): Promise<string> {
+  //   await firstItem.waitForDisplayed({ timeout: 10000 });
+  //   return await firstItem.getText();
+  // }
+
+  // async getItemQuantity(itemName: string): Promise<number> {
+  //   await quantityElement.waitForDisplayed({ timeout: 10000 });
+  //   const quantityText = await quantityElement.getText();
+  //   return parseInt(quantityText, 10);
+  // }
+
+  // async getTotalPrice(): Promise<number> {
+  //   const totalElement = await $();
+  //   await totalElement.waitForDisplayed({ timeout: 10000 });
+  //   const priceText = await totalElement.getText();
+  //   return parseFloat(priceText.replace(/[^0-9.]/g, ''));
+  // }
+
 
 }
 

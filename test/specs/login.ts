@@ -16,60 +16,58 @@ describe('AnyList - application', () => {
     await driver.activateApp(appPackage);
   });  
 
-  // it('should not be able to login with invalid credentials', async () => {
-  //   const loginPage = new LoginPage();
+  it('should not be able to login with invalid credentials', async () => {
+    const loginPage = new LoginPage();
 
-  //   try {
-  //     await loginPage.openLoginScreen();
+    try {
+      await loginPage.openLoginScreen();
 
-  //     await loginPage.login('wrong_user@mail.com', 'Control123');
+      await loginPage.login('wrong_user@mail.com', 'Control123');
 
-  //     const errorText = await loginPage.getErrorText();
-  //     await expect(errorText).toContain(
-  //       'The username and password entered do not match. Please try again.'
-  //     );
+      const errorText = await loginPage.getErrorText();
+      await expect(errorText).toContain(
+        'The username and password entered do not match. Please try again.'
+      );
 
-  //     await loginPage.confirmError();
+      await loginPage.confirmError();
 
-  //   } catch (err) {
-  //     console.error('Error when performing invalid login test:', err);
-  //   } finally {
-  //     console.log('Finished invalid login test');
-  //   }
-  // });
+    } catch (err) {
+      console.error('Error when performing invalid login test:', err);
+    } finally {
+      console.log('Finished invalid login test');
+    }
+  });
 
-  //  it('should be able to login with valid credentials', async () => {
-  //   const loginPage = new LoginPage();
-  //   try {
-  //     await loginPage.openLoginScreen();
+   it('should be able to login with valid credentials', async () => {
+    const loginPage = new LoginPage();
+    try {
+      await loginPage.openLoginScreen();
 
-  //     await loginPage.login('test_user@mail.com', 'Control123');
+      await loginPage.login('test_user@mail.com', 'Control123');
+      // await allowAnyListToSendYouNotificationsModal.clickOnDontAllow();
+      const isHomeVisible = await loginPage.isHomeDisplayed();
+      await expect(isHomeVisible).toBe(true);
 
-  //     // await allowAnyListToSendYouNotificationsModal.clickOnDontAllow();
+    } catch (err) {
+      console.error('Error when performing valid login test:', err);
+    } finally {
+      console.log('Finished valid login test');
+    }
+  });
 
-  //     const isHomeVisible = await loginPage.isHomeDisplayed();
-  //     await expect(isHomeVisible).toBe(true);
+  it('should create a new list successfully', async () => {
+    const browseFilterPage = new BrowseFilterPage();
+    await browseFilterPage.createList('List test QA');
+    expect(await browseFilterPage.isListVisible('List test QA')).toBe(true);
+    await browseFilterPage.ClickBack();
+  });
 
-  //   } catch (err) {
-  //     console.error('Error when performing valid login test:', err);
-  //   } finally {
-  //     console.log('Finished valid login test');
-  //   }
-  // });
-
-  // it('should create a new list successfully', async () => {
-  //   const browseFilterPage = new BrowseFilterPage();
-  //   await browseFilterPage.createList('List test QA');
-  //   expect(await browseFilterPage.isListVisible('List test QA')).toBe(true);
-  //   await browseFilterPage.ClickBack();
-  // });
-
-  // it('should open the filter menu', async () => {
-  //   const browseFilterPage = new BrowseFilterPage();
-  //   await browseFilterPage.openFilter();
-  //   await browseFilterPage.enterSearchInput('List test QA');
-  //   expect(await browseFilterPage.isListVisible('List test QA')).toBe(true);
-  // });
+  it('should open the filter menu', async () => {
+    const browseFilterPage = new BrowseFilterPage();
+    await browseFilterPage.openFilter();
+    await browseFilterPage.enterSearchInput('List test QA');
+    expect(await browseFilterPage.isListVisible('List test QA')).toBe(true);
+  });
 
   it('should add item to list', async () => { 
     const browseFilterPage = new BrowseFilterPage();
@@ -92,6 +90,16 @@ describe('AnyList - application', () => {
     await browseFilterPage.clickItem();   
     await browseFilterPage.clickPriceButton();
     await browseFilterPage.clickQuantityButton();
+    // const quantity = await browseFilterPage.getItemQuantity('coffee');
+    // expect(quantity).toBe(2); 
+    // const total = await browseFilterPage.getTotalPrice();
+    // expect(total).toBeCloseTo(price * quantity, 1);
+  
+  });
+
+  it('should launch app via deep link and verify UI', async () => {
+    const appPackage = 'com.purplecover.anylist';
+    const deepLinkUrl = 'anylist://product/1234';
   
   });
 
